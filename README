@@ -1,0 +1,436 @@
+Hi.
+
+./cli usage:
+
+intsn failed: Incorrect number of arguments
+        Usage: ./intsn eth0,"filter_string" tun0,"filter_string" any,"filter_string" etc.
+
+
+Interactive usage (while capture is running):
+
+# HELP:
+#       <space>         : Pauses or resumes the capture
+#       E               : Toggles everything
+#       i               : Toggles printing of interface
+#       p               : Toggles printing of "layer" path
+#       e               : Toggles ethernet headers
+#       t               : Toggles timestamp
+#       c               : Toggles packet count
+#       d               : Toggles debugging information
+#	s		: Toggles service translation
+#       h               : This help menu
+#       0-3     : Chooses a view layout
+
+
+
+Quick output example:
+
+
+VLAN example:
+
+# ./intsn any,"not tcp"
+IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+ARP who-has 10.10.1.10 tell 10.10.1.1 
+ARP who-has 10.10.1.10 tell 10.10.1.1 
+ARP who-has 10.10.1.10 tell 10.10.1.1 
+ARP who-has 10.10.1.10 tell 10.10.1.1 
+ARP who-has 10.10.1.10 tell 10.10.1.1 
+ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth0:ipv4:udp IP 192.168.1.140 > 192.168.1.1 17408 > 17152 UDP len 300 
+eth0:ipv4:udp IP 192.168.1.1 > 192.168.1.140 17152 > 17408 UDP len 300 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth0:arp ARP who-has 192.168.1.1 tell 192.168.1.140 
+eth0:arp ARP who-has 192.168.1.140 tell 192.168.1.1 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2.400:arp 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp VLAN 400 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2.400:arp 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp VLAN 400 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+lo:ipv4:icmp 00:00:00:00:00:00 > 00:00:00:00:00:00 IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp 00:00:00:00:00:00 > 00:00:00:00:00:00 IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp 00:00:00:00:00:00 > 00:00:00:00:00:00 IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+eth2.400:arp 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp VLAN 400 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2.400:arp 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp VLAN 400 08:00:27:32:43:88 > ff:ff:ff:ff:ff:ff ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+lo:ipv4:icmp IP 10.10.1.1 > 10.10.1.1 ICMP type 3 code 1 len 92 
+eth2.400:arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+eth2(400):arp ARP who-has 10.10.1.10 tell 10.10.1.1 
+# STATS:         lo ::: captured=36 received=36 drops=0 interface_drops=0
+# STATS:   eth3.100 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:       eth3 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:   eth2.400 ::: captured=17 received=17 drops=0 interface_drops=0
+# STATS:       eth2 ::: captured=17 received=17 drops=0 interface_drops=0
+# STATS:   eth1.318 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:       eth1 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:       eth0 ::: captured=4 received=4 drops=0 interface_drops=0
+# STATS:         lo ::: captured=36 received=36 drops=0 interface_drops=0
+# STATS:   eth3.100 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:       eth3 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:   eth2.400 ::: captured=17 received=17 drops=0 interface_drops=0
+# STATS:       eth2 ::: captured=17 received=17 drops=0 interface_drops=0
+# STATS:   eth1.318 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:       eth1 ::: captured=0 received=0 drops=0 interface_drops=0
+# STATS:       eth0 ::: captured=4 received=4 drops=0 interface_drops=0
+
+
+Just an example of monitoring a ton of interfaces, then applying the switches in the interactive ui:
+
+
+# make run
+make ; ./intsn eth0,icmp tun0,icmp sit0 sit1 any,"host 192.168.50.100" eth0,arp any,"udp and port 53" eth0,"port 6667" tun0,icmp -d -t -c -s
+gcc -Wall -O3 intsn.c intsn_parse.c intsn_net.c intsn_misc.c intsn_services.c -lpcap -levent -lbsd -o intsn
+intsn_parse.c: In function ‘p_decode_arp’:
+intsn_parse.c:197: warning: dereferencing type-punned pointer will break strict-aliasing rules
+intsn_parse.c:198: warning: dereferencing type-punned pointer will break strict-aliasing rules
+
+# INTERFACE: tun0 => Filter: icmp => RAW Raw IP
+# INTERFACE: eth0 => Filter: port 6667 => EN10MB Ethernet
+# INTERFACE: lo => Filter: udp and port 53 => EN10MB Ethernet
+# INTERFACE: vmnet8 => Filter: udp and port 53 => EN10MB Ethernet
+# INTERFACE: sit1 => Filter: udp and port 53 => RAW Raw IP
+# INTERFACE: vmnet1 => Filter: udp and port 53 => EN10MB Ethernet
+# INTERFACE: vboxnet0 => Filter: udp and port 53 => EN10MB Ethernet
+# INTERFACE: sit0 => Filter: udp and port 53 => RAW Raw IP
+# INTERFACE: tun0 => Filter: udp and port 53 => RAW Raw IP
+# INTERFACE: eth0 => Filter: udp and port 53 => EN10MB Ethernet
+# INTERFACE: eth0 => Filter: arp => EN10MB Ethernet
+# INTERFACE: lo => Filter: host 192.168.50.100 => EN10MB Ethernet
+# INTERFACE: vmnet8 => Filter: host 192.168.50.100 => EN10MB Ethernet
+# INTERFACE: sit1 => Filter: host 192.168.50.100 => RAW Raw IP
+# INTERFACE: vmnet1 => Filter: host 192.168.50.100 => EN10MB Ethernet
+# INTERFACE: vboxnet0 => Filter: host 192.168.50.100 => EN10MB Ethernet
+# INTERFACE: sit0 => Filter: host 192.168.50.100 => RAW Raw IP
+# INTERFACE: tun0 => Filter: host 192.168.50.100 => RAW Raw IP
+# INTERFACE: eth0 => Filter: host 192.168.50.100 => EN10MB Ethernet
+# INTERFACE: sit1 => Filter: all => RAW Raw IP
+# INTERFACE: sit0 => Filter: all => RAW Raw IP
+# INTERFACE: tun0 => Filter: icmp => RAW Raw IP
+# INTERFACE: eth0 => Filter: icmp => EN10MB Ethernet
+# ROUTE_INSERT: tun0 0201C80A 00000000 FFFFFFFF ::: dest=10.200.1.2 gw=0.0.0.0 mask=255.255.255.255 end=10.200.1.2  
+# ROUTE_INSERT: vmnet8 00B710AC 00000000 00FFFFFF ::: dest=172.16.183.0 gw=0.0.0.0 mask=255.255.255.0 end=172.16.183.255  
+# ROUTE_INSERT: vmnet1 007010AC 00000000 00FFFFFF ::: dest=172.16.112.0 gw=0.0.0.0 mask=255.255.255.0 end=172.16.112.255  
+# ROUTE_INSERT: tun0 0001C80A 0201C80A 00FFFFFF ::: dest=10.200.1.0 gw=10.200.1.2 mask=255.255.255.0 end=10.200.1.255  
+# ROUTE_INSERT: eth0 0001A8C0 00000000 00FFFFFF ::: dest=192.168.1.0 gw=0.0.0.0 mask=255.255.255.0 end=192.168.1.255  
+# ROUTE_INSERT: vboxnet0 0038A8C0 00000000 00FFFFFF ::: dest=192.168.56.0 gw=0.0.0.0 mask=255.255.255.0 end=192.168.56.255  
+# ROUTE_INSERT: eth0 00000000 0101A8C0 00000000 ::: dest=0.0.0.0 gw=192.168.1.1 mask=0.0.0.0 end=255.255.255.255  
+1365405587:0000000001 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31344 len 64 
+1365405587:0000000002 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31344 len 64 
+1365405587:0000000003 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31345 len 64 
+1365405587:0000000004 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31345 len 64 
+1365405587:0000000005 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31346 len 64 
+1365405587:0000000006 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31346 len 64 
+1365405587:0000000007 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 3549 seq 24 len 64 
+1365405587:0000000008 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 3549 seq 24 len 64 
+1365405587:0000000009 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31347 len 64 
+1365405587:0000000010 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31347 len 64 
+1365405587:0000000011 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31348 len 64 
+1365405587:0000000012 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31348 len 64 
+1365405588:0000000001 IP 192.168.1.50 > 216.155.130.130 48070 > ircd TCP seq 784860894 ack 933963756 ACK PSH len 25 
+1365405588:0000000002 IP 216.155.130.130 > 192.168.1.50 ircd > 48070 TCP seq 933963756 ack 784860919 ACK len 0 
+1365405588:0000000003 IP 216.155.130.130 > 192.168.1.50 ircd > 48070 TCP seq 933963756 ack 784860919 ACK PSH len 65 
+1365405588:0000000004 IP 192.168.1.50 > 216.155.130.130 48070 > ircd TCP seq 784860919 ack 933963821 ACK len 0 
+1365405588:0000000013 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31349 len 64 
+1365405589:0000000014 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31349 len 64 
+1365405589:0000000015 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31350 len 64 
+1365405590:0000000016 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31350 len 64 
+1365405590:0000000017 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31351 len 64 
+1365405591:0000000018 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31351 len 64 
+1365405591:0000000001 IP6 2001:470:7:5dd:0:0:0:2 > 2001:470:1f0e:1102:0:0:0:2 59152 > 9898 TCP seq 3218822007 ack 1600573997 ACK PSH len 96 
+1365405591:0000000002 IP6 2001:470:1f0e:1102:0:0:0:2 > 2001:470:7:5dd:0:0:0:2 9898 > 59152 TCP seq 1600573997 ack 3218822103 ACK PSH len 144 
+1365405591:0000000003 IP6 2001:470:7:5dd:0:0:0:2 > 2001:470:1f0e:1102:0:0:0:2 59152 > 9898 TCP seq 3218822103 ack 1600574141 ACK len 0 
+1365405591:0000000004 IP6 2001:470:7:5dd:0:0:0:2 > 2001:470:1f0e:1102:0:0:0:2 59154 > 9898 TCP seq 4195481928 ack 3335109711 ACK PSH len 80 
+1365405591:0000000005 sit1:ipv6:tcp IP6 2001:470:1f0e:1102:0:0:0:2 > 2001:470:7:5dd:0:0:0:2 9898 > 59154 TCP seq 3335109711 ack 4195482008 ACK PSH len 144 
+1365405591:0000000006 sit1:ipv6:tcp IP6 2001:470:7:5dd:0:0:0:2 > 2001:470:1f0e:1102:0:0:0:2 59154 > 9898 TCP seq 4195482008 ack 3335109855 ACK len 0 
+1365405591:0000000007 sit1:ipv6:tcp IP6 2001:470:1f0e:1102:0:0:0:2 > 2001:470:7:5dd:0:0:0:2 9898 > 59154 TCP seq 3335109711 ack 4195482008 ACK PSH len 144 
+1365405591:0000000008 sit1:ipv6:tcp IP6 2001:470:7:5dd:0:0:0:2 > 2001:470:1f0e:1102:0:0:0:2 59154 > 9898 TCP seq 4195482008 ack 3335109855 ACK len 0 
+1365405591:0000000019 eth0:ipv4:icmp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31352 len 64 
+1365405592:0000000020 eth0:ipv4:icmp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31352 len 64 
+IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933963821 ack 784860919 ACK PSH len 56 
+IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933963877 ACK len 0 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31353 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31353 len 64 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31354 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31354 len 64 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31355 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31355 len 64 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31356 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31356 len 64 
+IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 3549 seq 25 len 64 
+IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 3549 seq 25 len 64 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31357 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31357 len 64 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31358 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31358 len 64 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31359 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31359 len 64 
+IP 127.0.0.1 > 127.0.0.1 17037 > 13568 UDP len 40 
+IP 127.0.0.1 > 127.0.0.1 13568 > 17037 UDP len 121 
+IP 127.0.0.1 > 127.0.0.1 27275 > 13568 UDP len 27 
+IP 127.0.0.1 > 127.0.0.1 13568 > 27275 UDP len 85 
+IP 127.0.0.1 > 127.0.0.1 43743 > 13568 UDP len 26 
+IP 127.0.0.1 > 127.0.0.1 13568 > 43743 UDP len 67 
+IP 127.0.0.1 > 127.0.0.1 26046 > 13568 UDP len 22 
+IP 192.168.1.50 > 192.168.1.1 49081 > 13568 UDP len 33 
+IP 192.168.1.1 > 192.168.1.50 13568 > 49081 UDP len 633 
+IP 127.0.0.1 > 127.0.0.1 13568 > 26046 UDP len 97 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31360 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31360 len 64 
+IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933963877 ack 784860919 ACK PSH len 115 
+IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933963992 ACK len 0 
+IP 192.168.1.50 > 4.2.2.2 ICMP type ping id 5015 seq 31361 len 64 
+IP 4.2.2.2 > 192.168.1.50 ICMP type pong id 5015 seq 31361 len 64 
+IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933963992 ack 784860919 ACK PSH len 60 
+IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964052 ACK len 0 
+IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964052 ack 784860919 ACK PSH len 84 
+IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964136 ACK len 0 
+IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964136 ack 784860919 ACK PSH len 83 
+IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964219 ACK len 0 
+ARP who-has 192.168.1.1 tell 192.168.1.140 
+ARP who-has 192.168.1.1 tell 192.168.1.140 
+ARP who-has 192.168.1.140 tell 192.168.1.1 
+IP 192.168.1.50 > 66.225.225.225 39472 > 6667 TCP seq 1558162296 ack 4204869359 ACK PSH len 22 
+IP 66.225.225.225 > 192.168.1.50 6667 > 39472 TCP seq 4204869359 ack 1558162318 ACK len 0 
+eth0 ARP who-has 192.168.1.50 tell 192.168.1.1 
+eth0 ARP who-has 192.168.1.1 tell 192.168.1.50 
+eth0 IP 192.168.1.50 > 66.225.225.225 39472 > 6667 TCP seq 1558162318 ack 4204869359 ACK PSH len 24 
+eth0 IP 66.225.225.225 > 192.168.1.50 6667 > 39472 TCP seq 4204869359 ack 1558162342 ACK len 0 
+eth0 IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964219 ack 784860919 ACK PSH len 106 
+eth0 IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964325 ACK len 0 
+eth0 IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964325 ack 784860919 ACK PSH len 94 
+eth0 IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964419 ACK len 0 
+eth0:ipv4:tcp IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964419 ack 784860919 ACK PSH len 76 
+eth0:ipv4:tcp IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964495 ACK len 0 
+eth0:ipv4:tcp IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964495 ack 784860919 ACK PSH len 62 
+eth0:ipv4:tcp IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964557 ACK len 0 
+eth0:ipv4:icmp IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 1 len 64 
+eth0:ipv4:icmp IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 1 len 64 
+eth0:ipv4:tcp IP 192.168.1.50 > 66.225.225.225 39472 > 6667 TCP seq 1558162342 ack 4204869359 ACK PSH len 28 
+eth0:ipv4:tcp IP 66.225.225.225 > 192.168.1.50 6667 > 39472 TCP seq 4204869359 ack 1558162370 ACK PSH len 74 
+eth0:ipv4:tcp IP 192.168.1.50 > 66.225.225.225 39472 > 6667 TCP seq 1558162370 ack 4204869433 ACK len 0 
+eth0:ipv4:tcp IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964557 ack 784860919 ACK PSH len 81 
+eth0:ipv4:tcp IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964638 ACK len 0 
+eth0:ipv4:tcp IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964638 ack 784860919 ACK PSH len 95 
+eth0:ipv4:tcp IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964733 ACK len 0 
+eth0:ipv4:icmp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 2 len 64 
+eth0:ipv4:icmp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 2 len 64 
+eth0:ipv4:tcp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964733 ack 784860919 ACK PSH len 80 
+eth0:ipv4:tcp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964813 ACK len 0 
+IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 3 len 64 
+IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 3 len 64 
+c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964813 ack 784860919 ACK PSH len 83 
+aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964896 ACK len 0 
+aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 4 len 64 
+c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 4 len 64 
+c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933964896 ack 784860919 ACK PSH len 81 
+aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860919 ack 933964977 ACK len 0 
+aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 5 len 64 
+c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 5 len 64 
+1365405649:0000000040 eth0:ipv4:tcp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 216.155.130.130 48070 > ircd TCP seq 784860919 ack 933964977 ACK PSH len 25 
+1365405649:0000000041 eth0:ipv4:tcp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 216.155.130.130 > 192.168.1.50 ircd > 48070 TCP seq 933964977 ack 784860944 ACK len 0 
+1365405649:0000000042 eth0:ipv4:tcp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 216.155.130.130 > 192.168.1.50 ircd > 48070 TCP seq 933964977 ack 784860944 ACK PSH len 65 
+1365405649:0000000043 eth0:ipv4:tcp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 216.155.130.130 48070 > ircd TCP seq 784860944 ack 933965042 ACK len 0 
+1365405651:0000000051 eth0:ipv4:icmp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 6 len 64 
+1365405651:0000000006 eth0:arp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 ARP who-has 192.168.1.50 tell 192.168.1.1 
+1365405651:0000000007 eth0:arp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 ARP who-has 192.168.1.1 tell 192.168.1.50 
+1365405651:0000000052 eth0:ipv4:icmp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 6 len 64 
+1365405651:0000000044 eth0:ipv4:tcp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 216.155.130.130 > 192.168.1.50 ircd > 48070 TCP seq 933965042 ack 784860944 ACK PSH len 85 
+1365405651:0000000045 eth0:ipv4:tcp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 216.155.130.130 48070 > ircd TCP seq 784860944 ack 933965127 ACK len 0 
+1365405656:0000000008 eth0:arp 08:00:27:60:67:ea > c8:d7:19:87:f5:e9 ARP who-has 192.168.1.1 tell 192.168.1.140 
+1365405656:0000000009 eth0:arp 08:00:27:60:67:ea > c8:d7:19:87:f5:e9 ARP who-has 192.168.1.1 tell 192.168.1.140 
+1365405656:0000000010 eth0:arp c8:d7:19:87:f5:e9 > 08:00:27:60:67:ea ARP who-has 192.168.1.140 tell 192.168.1.1 
+1365405656:0000000053 eth0:ipv4:icmp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 7 len 64 
+1365405656:0000000054 eth0:ipv4:icmp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 7 len 64 
+1365405658:0000000046 eth0:ipv4:tcp c8:d7:19:87:f5:e9 > aa:00:04:00:0a:04 IP 216.155.130.130 > 192.168.1.50 ircd > 48070 TCP seq 933965127 ack 784860944 ACK PSH len 83 
+1365405658:0000000047 eth0:ipv4:tcp aa:00:04:00:0a:04 > c8:d7:19:87:f5:e9 IP 192.168.1.50 > 216.155.130.130 48070 > ircd TCP seq 784860944 ack 933965210 ACK len 0 
+IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933965210 ack 784860944 ACK PSH len 70 
+IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860944 ack 933965280 ACK len 0 
+# HELP:
+#	<space>		: Pauses or resumes the capture
+#	E		: Toggles everything
+#	i		: Toggles printing of interface
+#	p		: Toggles printing of "layer" path
+#	e		: Toggles ethernet headers
+#	t		: Toggles timestamp
+#	c		: Toggles packet count
+#	s		: Toggles service translation
+#	d		: Toggles debugging information
+#	h		: This help menu
+#	0-3	: Chooses a view layout
+IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 8 len 64 
+IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 8 len 64 
+IP 216.155.130.130 > 192.168.1.50 6667 > 48070 TCP seq 933965280 ack 784860944 ACK PSH len 49 
+IP 192.168.1.50 > 216.155.130.130 48070 > 6667 TCP seq 784860944 ack 933965329 ACK len 0 
+# PAUSED
+# HELP:
+#	<space>		: Pauses or resumes the capture
+#	E		: Toggles everything
+#	i		: Toggles printing of interface
+#	p		: Toggles printing of "layer" path
+#	e		: Toggles ethernet headers
+#	t		: Toggles timestamp
+#	c		: Toggles packet count
+#	s		: Toggles service translation
+#	d		: Toggles debugging information
+#	h		: This help menu
+#	0-3	: Chooses a view layout
+# SWITCHED VIEW: 2
+# RESUMED
+IP 216.155.130.130 6667 > 192.168.1.50 48070 TCP seq 933965463 ack 784860944 ACK PSH len 89 
+IP 192.168.1.50 48070 > 216.155.130.130 6667 TCP seq 784860944 ack 933965552 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 12 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 12 len 64 
+eth0 IP 216.155.130.130 6667 > 192.168.1.50 48070 TCP seq 933965552 ack 784860944 ACK PSH len 62 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 6667 TCP seq 784860944 ack 933965614 ACK len 0 
+eth0 IP 216.155.130.130 6667 > 192.168.1.50 48070 TCP seq 933965614 ack 784860944 ACK PSH len 95 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 6667 TCP seq 784860944 ack 933965709 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 13 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 13 len 64 
+eth0 IP 192.168.1.50 39472 > 66.225.225.225 6667 TCP seq 1558162370 ack 4204869433 ACK PSH len 28 
+eth0 IP 66.225.225.225 6667 > 192.168.1.50 39472 TCP seq 4204869433 ack 1558162398 ACK PSH len 74 
+eth0 IP 192.168.1.50 39472 > 66.225.225.225 6667 TCP seq 1558162398 ack 4204869507 ACK len 0 
+eth0 IP 216.155.130.130 6667 > 192.168.1.50 48070 TCP seq 933965709 ack 784860944 ACK PSH len 40 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 6667 TCP seq 784860944 ack 933965749 ACK len 0 
+eth0 IP 216.155.130.130 6667 > 192.168.1.50 48070 TCP seq 933965749 ack 784860944 ACK PSH len 81 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 6667 TCP seq 784860944 ack 933965830 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 14 len 64 
+eth0 ARP who-has 192.168.1.50 tell 192.168.1.1 
+eth0 ARP who-has 192.168.1.1 tell 192.168.1.50 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 14 len 64 
+eth0 IP 216.155.130.130 6667 > 192.168.1.50 48070 TCP seq 933965830 ack 784860944 ACK PSH len 64 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 6667 TCP seq 784860944 ack 933965894 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 15 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 15 len 64 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 16 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 16 len 64 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933965894 ack 784860944 ACK PSH len 52 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860944 ack 933965946 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933965946 ack 784860944 ACK PSH len 53 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860944 ack 933965999 ACK len 0 
+eth0 ARP who-has 192.168.1.1 tell 192.168.1.140 
+eth0 ARP who-has 192.168.1.1 tell 192.168.1.140 
+eth0 ARP who-has 192.168.1.140 tell 192.168.1.1 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 17 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 17 len 64 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860944 ack 933965999 ACK PSH len 25 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933965999 ack 784860969 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933965999 ack 784860969 ACK PSH len 65 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966064 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966064 ack 784860969 ACK PSH len 114 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966178 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 18 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 18 len 64 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966178 ack 784860969 ACK PSH len 67 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966245 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966245 ack 784860969 ACK PSH len 55 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966300 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966300 ack 784860969 ACK PSH len 84 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966384 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 19 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 19 len 64 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966384 ack 784860969 ACK PSH len 48 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966432 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966432 ack 784860969 ACK PSH len 83 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966515 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 20 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 20 len 64 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966515 ack 784860969 ACK PSH len 127 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966642 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966642 ack 784860969 ACK PSH len 64 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966706 ACK len 0 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966706 ack 784860969 ACK PSH len 61 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966767 ACK len 0 
+eth0 IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 21 len 64 
+eth0 IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 21 len 64 
+eth0 IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966767 ack 784860969 ACK PSH len 64 
+eth0 IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966831 ACK len 0 
+eth0:ipv4:icmp IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 22 len 64 
+eth0:arp ARP who-has 192.168.1.50 tell 192.168.1.1 
+eth0:arp ARP who-has 192.168.1.1 tell 192.168.1.50 
+eth0:ipv4:icmp IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 22 len 64 
+eth0:ipv4:tcp IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966831 ack 784860969 ACK PSH len 82 
+eth0:ipv4:tcp IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933966913 ACK len 0 
+eth0:ipv4:tcp IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933966913 ack 784860969 ACK PSH len 165 
+eth0:ipv4:tcp IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933967078 ACK len 0 
+eth0:ipv4:icmp IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 23 len 64 
+eth0:ipv4:icmp IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 23 len 64 
+eth0:ipv4:icmp IP 192.168.1.50 > 8.8.8.8 ICMP type ping id 4734 seq 24 len 64 
+eth0:ipv4:icmp IP 8.8.8.8 > 192.168.1.50 ICMP type pong id 4734 seq 24 len 64 
+eth0:ipv4:tcp IP 216.155.130.130 ircd > 192.168.1.50 48070 TCP seq 933967078 ack 784860969 ACK PSH len 73 
+eth0:ipv4:tcp IP 192.168.1.50 48070 > 216.155.130.130 ircd TCP seq 784860969 ack 933967151 ACK len 0 
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=icmp
+# STATS:       eth0 ::: captured=102 received=102 drops=0 interface_drops=0 :: filter=port 6667
+# STATS:         lo ::: captured=16 received=16 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:     vmnet8 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       sit1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:     vmnet1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:   vboxnet0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       sit0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       eth0 ::: captured=2 received=2 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       eth0 ::: captured=17 received=17 drops=0 interface_drops=0 :: filter=arp
+# STATS:         lo ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:     vmnet8 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       sit1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:     vmnet1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:   vboxnet0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       sit0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       eth0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       sit1 ::: captured=8 received=8 drops=0 interface_drops=0 :: filter=all
+# STATS:       sit0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=all
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=icmp
+# STATS:       eth0 ::: captured=88 received=88 drops=0 interface_drops=0 :: filter=icmp
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=icmp
+# STATS:       eth0 ::: captured=102 received=102 drops=0 interface_drops=0 :: filter=port 6667
+# STATS:         lo ::: captured=16 received=16 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:     vmnet8 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       sit1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:     vmnet1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:   vboxnet0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       sit0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       eth0 ::: captured=2 received=2 drops=0 interface_drops=0 :: filter=udp and port 53
+# STATS:       eth0 ::: captured=17 received=17 drops=0 interface_drops=0 :: filter=arp
+# STATS:         lo ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:     vmnet8 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       sit1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:     vmnet1 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:   vboxnet0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       sit0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       eth0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=host 192.168.50.100
+# STATS:       sit1 ::: captured=8 received=8 drops=0 interface_drops=0 :: filter=all
+# STATS:       sit0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=all
+# STATS:       tun0 ::: captured=0 received=0 drops=0 interface_drops=0 :: filter=icmp
+# STATS:       eth0 ::: captured=88 received=88 drops=0 interface_drops=0 :: filter=icmp
+
+
+pc.
